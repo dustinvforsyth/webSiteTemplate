@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "declaration": false,
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": false,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        //"strictNullChecks": true,
+        "lib": [
+            "es2015.promise",
+            "dom",
+            "es2016",
+            "es5"
+        ]
+    },
+    "compileOnSave": true,
+    "exclude": [
+        "build",
+        "node_modules",
+        "bower_components/**/demo/*",
+        "bower_components/**/test/*"
+    ]
+}
