@@ -1,25 +1,16 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-/// <reference path="../bower_components/polymer2-ts/polymer.d.ts" />
-var MyApp = (function (_super) {
-    __extends(MyApp, _super);
-    function MyApp() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.sections = [
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+let MyApp = class MyApp extends Polymer.Element {
+    constructor() {
+        super(...arguments);
+        this.sections = [
             'feature',
             'latest',
             'fashion',
@@ -28,89 +19,116 @@ var MyApp = (function (_super) {
             'food',
             'travel'
         ];
-        return _this;
+        this.section = 'feature';
     }
-    MyApp.prototype.attached = function () {
-        this.$.async(function () {
-            if (!this.route.path) {
-                this.set('route.path', 'feature');
-            }
-        });
-    };
-    // observers: [
-    //     '_hashDidChange(route.path, items, featuredItems)'
-    // ]
-    // @computed('sections, sectionData.section')
-    MyApp.prototype._computeSelectedTab = function (sections, section) {
+    connectedCallback() {
+        super.connectedCallback();
+        let self = this;
+        if (!self.route.path) {
+            self.set('route.path', 'feature');
+            this.section = 'feature';
+        }
+    }
+    _computeSelectedTab(sections, section) {
         return sections.indexOf(section);
-    };
-    MyApp.prototype._getItemsCopy = function (items) {
+    }
+    _getItemsCopy(items) {
         return items ? items.slice() : [];
-    };
-    MyApp.prototype._getFeaturedItem = function (featuredItems, section) {
+    }
+    _getFeaturedItem(featuredItems, section) {
         if (featuredItems && section) {
             return featuredItems.filter(function (item) {
                 return item.category.toLowerCase() === section;
             }).pop();
         }
         return '';
-    };
-    MyApp.prototype._getDetailItem = function (items, id) {
+    }
+    _getDetailItem(items, id) {
         if (items) {
             return items[id];
         }
-    };
-    // @computed('onDetailPage')
-    MyApp.prototype._computePage = function (onDetailPage) {
+    }
+    _computePage(onDetailPage) {
         return onDetailPage ? 'detail' : 'list';
-    };
-    MyApp.prototype._hashDidChange = function () {
+    }
+    _hashDidChange() {
         Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
         this.$.headerLayout.resetLayout();
         this.$.drawer.close();
-    };
-    MyApp.prototype._equal = function (a, b) {
+    }
+    _equal(a, b) {
         return a === b;
-    };
-    MyApp.prototype._getSectionClass = function (index, selectedTab) {
+    }
+    _getSectionClass(index, selectedTab) {
         return index === selectedTab ? 'active' : '';
-    };
-    MyApp.prototype._shouldShowTabs = function (onDetailPage, smallScreen) {
+    }
+    _shouldShowTabs(onDetailPage, smallScreen) {
         return !onDetailPage && !smallScreen;
-    };
-    __decorate([
-        property()
-    ], MyApp.prototype, "sections", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "selectedTab", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "items", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "featuredItems", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "page", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "route", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "subRoute", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "sectionData", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "idData", void 0);
-    __decorate([
-        property()
-    ], MyApp.prototype, "onDetailPage", void 0);
-    __decorate([
-        observe('route.path, items, featuredItems')
-    ], MyApp.prototype, "_hashDidChange", null);
-    return MyApp;
-}(Polymer.Element));
+    }
+};
+__decorate([
+    property({ notify: true }),
+    __metadata("design:type", Array)
+], MyApp.prototype, "sections", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Number)
+], MyApp.prototype, "selectedTab", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", String)
+], MyApp.prototype, "section", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Array)
+], MyApp.prototype, "items", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Array)
+], MyApp.prototype, "featuredItems", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", String)
+], MyApp.prototype, "page", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Object)
+], MyApp.prototype, "route", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Object)
+], MyApp.prototype, "subRoute", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Object)
+], MyApp.prototype, "sectionData", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Object)
+], MyApp.prototype, "idData", void 0);
+__decorate([
+    property(),
+    __metadata("design:type", Boolean)
+], MyApp.prototype, "onDetailPage", void 0);
+__decorate([
+    computed('selectedTab'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], MyApp.prototype, "_computeSelectedTab", null);
+__decorate([
+    computed('page'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], MyApp.prototype, "_computePage", null);
+__decorate([
+    observe('route.path, items, featuredItems'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], MyApp.prototype, "_hashDidChange", null);
+MyApp = __decorate([
+    customElement('my-app')
+], MyApp);
 //# sourceMappingURL=my-app.js.map

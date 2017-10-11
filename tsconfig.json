@@ -1,25 +1,30 @@
 {
     "compilerOptions": {
-        "declaration": false,
-        "module": "commonjs",
-        "target": "es5",
-        "noImplicitAny": false,
+        "target": "es2015",
         "experimentalDecorators": true,
-        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "strictNullChecks": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
         "sourceMap": true,
-        //"strictNullChecks": true,
         "lib": [
-            "es2015.promise",
-            "dom",
-            "es2016",
-            "es5"
+            "es2017",
+            "dom"
+        ],
+        "typeRoots": [
+            "types"
         ]
     },
     "compileOnSave": true,
+    "include": [
+        "bower_components/**/*.ts",
+        "src/**/*.ts"
+    ],
     "exclude": [
         "build",
+        "es5-build",
         "node_modules",
-        "bower_components/**/demo/*",
+        "bower_components/reflect-metadata/",
         "bower_components/**/test/*"
     ]
 }

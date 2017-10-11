@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer2-ts/polymer2-ts.html">
 <link rel="import" href="shrine-item.html">
 <link rel="import" href="shrine-featured-item.html">
 
@@ -95,33 +96,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   </template>
 
-  <script>
-
-  Polymer({
-
-    is: 'shrine-list',
-
-    properties: {
-
-      items: {
-        type: Array
-      },
-
-      featuredItem: {
-        type: Object
-      },
-
-      section: {
-        type: String
-      }
-    },
-
-    _sortItems: function() {
-      return Math.round(Math.random()*3) - 1;
-    }
-
-  });
-
-  </script>
+  <script src="shrine-list.js"></script>
 
 </dom-module>

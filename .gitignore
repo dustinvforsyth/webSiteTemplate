@@ -1,3 +1,16 @@
-bower_components/
-build/
-node_modules/
+# Add any directories, files, or patterns you don't want to be tracked by version control
+bower_components
+dist
+node_modules
+build
+!build/bundled/publish.csproj
+/src/**/*.js
+/src/*.js
+/src/**/*.map
+/src/*.map
+*.map
+test/*.js
+.vscode/symbols.json
+test/validators/*.js
+test/xpath/*.js
+.vscode/settings.json

@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer2-ts/polymer2-ts.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
@@ -262,36 +263,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   </template>
 
-  <script>
-
-  Polymer({
-
-    is: 'shrine-detail',
-
-    properties: {
-
-      item: {
-        type: Object,
-        observer: '_itemChanged'
-      },
-
-      section: {
-        type: String
-      },
-
-      relatedItems: {
-        type: Array
-      }
-
-    },
-
-    _itemChanged: function(item) {
-      this.$.img.src = '';
-      this.$.img.src = item.imageUrl;
-    }
-
-  });
-
-  </script>
+  <script src="shrine-detail.js"></script>
 
 </dom-module>

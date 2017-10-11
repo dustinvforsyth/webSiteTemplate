@@ -1,9 +1,8 @@
-/// <reference path="../bower_components/polymer2-ts/polymer.d.ts" />
+@customElement('my-app')
 class MyApp extends Polymer.Element {
-    requestInstance: (key: string) => any;
 
-    @property()
-    sections: any[] = [
+    @property({ notify: true })
+    sections: string[] = [
         'feature',
         'latest',
         'fashion',
@@ -17,6 +16,9 @@ class MyApp extends Polymer.Element {
     selectedTab: number;
 
     @property()
+    section: string = 'feature';
+
+    @property()
     items: any[];
 
     @property()
@@ -26,7 +28,7 @@ class MyApp extends Polymer.Element {
     page: string;
 
     @property()
-    route: Object;
+    route: any;
 
     @property()
     subRoute: object;
@@ -40,44 +42,41 @@ class MyApp extends Polymer.Element {
     @property()
     onDetailPage: boolean;
 
-    attached() {
-        this.$.async(function () {
-            if (!this.route.path) {
-                this.set('route.path', 'feature');
-            }
-        });
+    connectedCallback() {
+        super.connectedCallback();
+        let self = this;
+        if (!self.route.path) {
+            self.set('route.path', 'feature');
+            this.section = 'feature';
+        }
     }
 
-    // observers: [
-    //     '_hashDidChange(route.path, items, featuredItems)'
-    // ]
-
-    // @computed('sections, sectionData.section')
-    _computeSelectedTab(sections, section) {
+    @computed('selectedTab')
+    _computeSelectedTab(sections: any, section: any) {
         return sections.indexOf(section);
     }
 
-    _getItemsCopy(items) {
+    _getItemsCopy(items: any) {
         return items ? items.slice() : [];
     }
 
-    _getFeaturedItem(featuredItems, section) {
+    _getFeaturedItem(featuredItems: any, section: any) {
         if (featuredItems && section) {
-            return featuredItems.filter(function (item) {
+            return featuredItems.filter(function (item: any) {
                 return item.category.toLowerCase() === section;
             }).pop();
         }
         return '';
     }
 
-    _getDetailItem(items, id) {
+    _getDetailItem(items: any, id: any) {
         if (items) {
             return items[id];
         }
     }
 
-    // @computed('onDetailPage')
-    _computePage(onDetailPage) {
+    @computed('page')
+    _computePage(onDetailPage: any) {
         return onDetailPage ? 'detail' : 'list';
     }
 
@@ -88,15 +87,15 @@ class MyApp extends Polymer.Element {
         this.$.drawer.close();
     }
 
-    _equal(a, b) {
+    _equal(a: any, b: any) {
         return a === b;
     }
 
-    _getSectionClass(index, selectedTab) {
+    _getSectionClass(index: any, selectedTab: any) {
         return index === selectedTab ? 'active' : '';
     }
 
-    _shouldShowTabs(onDetailPage, smallScreen) {
+    _shouldShowTabs(onDetailPage: any, smallScreen: any) {
         return !onDetailPage && !smallScreen;
     }
 }
