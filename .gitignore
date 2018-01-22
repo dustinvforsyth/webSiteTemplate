@@ -14,3 +14,7 @@ test/*.js
 test/validators/*.js
 test/xpath/*.js
 .vscode/settings.json
+*.map
+*.map
+src/my-app.js.map
+*.map

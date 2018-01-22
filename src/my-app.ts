@@ -51,10 +51,10 @@ class MyApp extends Polymer.Element {
         }
     }
 
-    @computed('selectedTab')
-    _computeSelectedTab(sections: any, section: any) {
-        return sections.indexOf(section);
-    }
+    // @computed('selectedTab')
+    // _computeSelectedTab(sections: any, section: any) {
+    //     // return sections.indexOf(section);
+    // }
 
     _getItemsCopy(items: any) {
         return items ? items.slice() : [];
@@ -75,10 +75,15 @@ class MyApp extends Polymer.Element {
         }
     }
 
-    @computed('page')
-    _computePage(onDetailPage: any) {
-        return onDetailPage ? 'detail' : 'list';
+    @observe('onDetailPage')
+    _setPage(onDetailPage: any) {
+        this.page = onDetailPage ? 'detail' : 'list';
     }
+
+    // @computed('page')
+    // _computePage(onDetailPage: any) {
+    //     return onDetailPage ? 'detail' : 'list';
+    // }
 
     @observe('route.path, items, featuredItems')
     _hashDidChange() {

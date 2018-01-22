@@ -2,10 +2,12 @@
   "entrypoint": "index.html",
   "shell": "src/my-app.html",
   "fragments": [
-    "src/my-view1.html",
-    "src/my-view2.html",
-    "src/my-view3.html",
-    "src/my-view404.html"
+    "src/my-app.html",
+    "src/shrine-detail.html",
+    "src/shrine-featured-item.html",
+    "src/shrine-item.html",
+    "src/shrine-list.html",
+    "src/shrine-simple-item.html"
   ],
   "sources": [
     "src/**/*",
@@ -14,20 +16,42 @@
   ],
   "extraDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/*.js"
+    "bower_components/webcomponentsjs/webcomponents-lite.js",
+    "bower_components/webcomponentsjs/custom-elements-es5-adapter.js",
+    "node_modules/babel-polyfill/dist/polyfill.min.js"
   ],
-  "lint": {
-    "rules": ["polymer-2"]
-  },
-  "builds": [
-    {
-      "preset": "es5-bundled"
+  "builds": [{
+      "name": "es6",
+      "js": {
+        "minify": false
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": false,
+      "addServiceWorker": true,
+      "addPushManifest": true,
+      "insertPrefetchLinks": true
     },
     {
-      "preset": "es6-bundled"
-    },
-    {
-      "preset": "es6-unbundled"
+      "name": "es5",
+      "js": {
+        "minify": false,
+        "compile": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": false,
+      "addServiceWorker": true,
+      "addPushManifest": true,
+      "insertPrefetchLinks": true
     }
   ]
 }

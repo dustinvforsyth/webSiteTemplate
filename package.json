@@ -1,7 +1,7 @@
 {
     "name": "project",
     "version": "1.4.2",
-    "description": "ManualEntryTool",
+    "description": "AMS360LoginPortal",
     "main": "service-worker.js",
     "directories": {
         "test": "test"
@@ -13,11 +13,11 @@
         "tslint": "^4.0.2",
         "browser-sync": "^2.18.2",
         "gulp": "^3.9.1",
-        "typescript": "^2.4.2",
+        "typescript": "^2.4.1",
         "bower": "*",
         "mkdirp": "0.5.x"
     },
-    "scripts": {
+    "scriptspc": {
         "postinstall": "bower install",
         "lint": "tslint \"src/**/*.ts\"",
         "clean": "echo Cleaning... && mkdirp es5-build && rmdir /s /q es5-build",
@@ -26,6 +26,17 @@
         "build": "npm run build:es2015 && npm run build:es2017",
         "publish": "npm run build",
         "postpublish": "echo \"Moving Publish Scripts to Root...\" && move build\\es6\\Web.config build\\Web.config && move build\\es6\\Web.Release.config build\\Web.Release.config && move build\\es6\\Web.Debug.config build\\Web.Debug.config && move build\\es6\\publish.csproj build\\publish.csproj && move build\\es6\\Properties build\\Properties",
+        "test": "npm run lint && tsc"
+    },
+    "scripts": {
+        "postinstall": "bower install",
+        "lint": "tslint \"src/**/*.ts\"",
+        "clean": "echo Cleaning... && mkdirp es5-build && rm -r es5-build",
+        "build:es2015": "echo \"Transpiling and building es2015...\" && npm run clean && npm run lint && tsc && polymer build && mv build/es5 es5-build ",
+        "build:es2017": "echo \"Transpiling and building es2017...\" npm run lint && tsc -t es2017 && polymer build && rm -r build/es5 && mv es5-build build/es5",
+        "build": "npm run build:es2015 && npm run build:es2017",
+        "publish": "npm run build",
+        "postpublish": "echo \"Moving Publish Scripts to Root...\" && move build/es6/Web.config build/Web.config && mv build/es6/Web.Release.config build/Web.Release.config && mv build/es6/Web.Debug.config build/Web.Debug.config && mv build/es6/publish.csproj build/publish.csproj && mv build/es6/Properties build/Properties",
         "test": "npm run lint && tsc"
     },
     "author": "",

@@ -29,9 +29,10 @@ let MyApp = class MyApp extends Polymer.Element {
             this.section = 'feature';
         }
     }
-    _computeSelectedTab(sections, section) {
-        return sections.indexOf(section);
-    }
+    // @computed('selectedTab')
+    // _computeSelectedTab(sections: any, section: any) {
+    //     // return sections.indexOf(section);
+    // }
     _getItemsCopy(items) {
         return items ? items.slice() : [];
     }
@@ -48,9 +49,13 @@ let MyApp = class MyApp extends Polymer.Element {
             return items[id];
         }
     }
-    _computePage(onDetailPage) {
-        return onDetailPage ? 'detail' : 'list';
+    _setPage(onDetailPage) {
+        this.page = onDetailPage ? 'detail' : 'list';
     }
+    // @computed('page')
+    // _computePage(onDetailPage: any) {
+    //     return onDetailPage ? 'detail' : 'list';
+    // }
     _hashDidChange() {
         Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
         this.$.headerLayout.resetLayout();
@@ -111,17 +116,11 @@ __decorate([
     __metadata("design:type", Boolean)
 ], MyApp.prototype, "onDetailPage", void 0);
 __decorate([
-    computed('selectedTab'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", void 0)
-], MyApp.prototype, "_computeSelectedTab", null);
-__decorate([
-    computed('page'),
+    observe('onDetailPage'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], MyApp.prototype, "_computePage", null);
+], MyApp.prototype, "_setPage", null);
 __decorate([
     observe('route.path, items, featuredItems'),
     __metadata("design:type", Function),

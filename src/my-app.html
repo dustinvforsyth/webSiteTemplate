@@ -28,8 +28,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
 
     <style>
-
-      :host {
+       :host {
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       }
 
@@ -39,7 +38,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.2);
           height: 10px;
           bottom: -10px;
-        };
+        }
+        ;
       }
 
       app-header:not([shadow]) {
@@ -49,7 +49,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app-drawer {
         --app-drawer-content-container: {
           background-color: #f3f3f3;
-        };
+        }
+        ;
       }
 
       #mainToolbar {
@@ -88,19 +89,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: calc(100vh - 65px);
       }
 
-      :host([page=detail]) #mainToolbar {
+       :host([page=detail]) #mainToolbar {
         height: 64px;
       }
 
-      :host([page=detail]) paper-tabs {
+       :host([page=detail]) paper-tabs {
         display: none;
       }
 
-      :host([page=detail]) .leftItem [icon=arrow-back] {
+       :host([page=detail]) .leftItem [icon=arrow-back] {
         display: block;
       }
 
-      :host([page=detail]) .leftItem [icon=menu] {
+       :host([page=detail]) .leftItem [icon=menu] {
         display: none;
       }
 
@@ -167,10 +168,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 35px;
         color: #0a3142;
       }
-
       /**
        * Desktop small, tablet
        */
+
       @media (max-width: 1200px) {
         .logo {
           width: 89px;
@@ -185,10 +186,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           height: auto;
         }
       }
-
       /**
        * Phone
        */
+
       @media (max-width: 600px) {
         .leftItem [icon=menu] {
           display: block;
@@ -198,20 +199,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           display: none;
         }
       }
-
     </style>
 
     <app-location route="{{route}}" use-hash-as-path></app-location>
-    <app-route
-        route="{{route}}"
-        pattern=":section"
-        data="{{sectionData}}"
-        tail="{{subRoute}}"></app-route>
-    <app-route
-        route="{{subRoute}}"
-        pattern="/:id"
-        data="{{idData}}"
-        active="{{onDetailPage}}"></app-route>
+    <app-route route="{{route}}" pattern=":section" data="{{sectionData}}" tail="{{subRoute}}"></app-route>
+    <app-route route="{{subRoute}}" pattern="/:id" data="{{idData}}" active="{{onDetailPage}}"></app-route>
 
     <iron-media-query query="max-width: 600px" query-matches="{{smallScreen}}"></iron-media-query>
 
@@ -220,7 +212,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer slot="drawer" id="drawer" swipe-open="[[smallScreen]]">
         <template is="dom-if" if="[[smallScreen]]">
           <app-toolbar class="profileBar">
-            <img class="profilePic" src="//app-layout-assets.appspot.com/assets/shrine/profile_pic.jpg"  width="30" height="30">
+            <img class="profilePic" src="//app-layout-assets.appspot.com/assets/shrine/profile_pic.jpg" width="30" height="30">
             <div class="profileName">Stella</div>
             <paper-icon-button icon="settings" aria-label="Settings"></paper-icon-button>
           </app-toolbar>
@@ -238,10 +230,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <app-toolbar id="mainToolbar">
             <div class="navItem leftItem">
               <paper-icon-button icon="menu" drawer-toggle alt="Toogle navigation menu"></paper-icon-button>
-              <a href="#[[sectionData.section]]" tabindex="-1"><paper-icon-button icon="arrow-back"  alt="Back to the home"></paper-icon-button></a>
+              <a href="#[[sectionData.section]]" tabindex="-1">
+                <paper-icon-button icon="arrow-back" alt="Back to the home"></paper-icon-button>
+              </a>
             </div>
             <div class="spacer">
-              <img src="//app-layout-assets.appspot.com/assets/shrine/shrine_logo.svg" class="logo" alt="SHRINE">
+              <img src="//app-layout-assets.appspot.com/assets/shrine/shrine_logo.svg" class="logo" alt="Four Wheel Auto">
             </div>
             <div class="navItem">
               <paper-icon-button icon="shopping-cart" aria-label="Shopping cart"></paper-icon-button>
@@ -262,20 +256,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <iron-pages selected="[[page]]" attr-for-selected="name">
           <!-- detail of item -->
           <template is="dom-if" if="[[_equal(page, 'detail')]]">
-            <shrine-detail
-                name="detail"
-                section="[[sectionData.section]]"
-                related-items="[[items]]"
-                item="[[_getDetailItem(items, idData.id)]]">
+            <shrine-detail name="detail" section="[[sectionData.section]]" related-items="[[items]]" item="[[_getDetailItem(items, idData.id)]]">
             </shrine-detail>
           </template>
           <!-- list of items -->
           <template is="dom-if" if="[[_equal(page, 'list')]]">
-            <shrine-list
-                name="list"
-                section="[[sectionData.section]]"
-                items="[[_getItemsCopy(items, sectionData.section)]]"
-                featured-item="[[_getFeaturedItem(featuredItems, sectionData.section)]]">
+            <shrine-list name="list" section="[[sectionData.section]]" items="[[_getItemsCopy(items, sectionData.section)]]" featured-item="[[_getFeaturedItem(featuredItems, sectionData.section)]]">
             </shrine-list>
           </template>
         </iron-pages>
@@ -285,6 +271,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   </template>
 
-<script src="my-app.js"></script>
+  <script src="my-app.js"></script>
 
 </dom-module>
